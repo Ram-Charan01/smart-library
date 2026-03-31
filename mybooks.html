@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Books</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <!-- 🔷 Navbar -->
+  <nav class="navbar">
+    <h1>📚 Smart Library</h1>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="mybooks.html">My Books</a>
+      <a href="#" id="authBtn"></a>
+    </div>
+  </nav>
+
+  <!-- 📊 Page Title -->
+  <section style="padding:20px;">
+    <h2>📖 My Reserved Books</h2>
+  </section>
+
+  <!-- 📋 Table -->
+  <section style="padding:20px;">
+    <table class="book-table">
+      <thead>
+        <tr>
+          <th>Book Name</th>
+          <th>Status</th>
+          <th>Reserved Date</th>
+          <th>Due Date</th>
+          <th>Return Status</th>
+        </tr>
+      </thead>
+      <tbody id="myBooksTable">
+        <!-- Data comes from JS -->
+      </tbody>
+    </table>
+  </section>
+
+  <!-- JS Files -->
+  <script src="js/data.js"></script>
+  <script src="js/mybooks.js"></script>
+  <script src="js/auth.js"></script>
+
+</body>
+</html>

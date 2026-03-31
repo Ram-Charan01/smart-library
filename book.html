@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Details</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <h1>📚 Smart Library</h1>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="mybooks.html">My Books</a>
+      <a href="#" id="authBtn"></a>
+    </div>
+  </nav>
+
+  <section style="padding:20px;" id="bookDetailsContainer">
+    <h2>Book Details</h2>
+    <div id="bookDetails">Loading book...</div>
+  </section>
+
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    const detailsContainer = document.getElementById("bookDetails");
+    const query = new URLSearchParams(window.location.search);
+    const id = parseInt(query.get("id"), 10);
+
+    const book = getBookById(id);
+    if (!book) {
+      detailsContainer.innerHTML = "<p>Book not found.</p>";
+    } else {
+      const available = book.stock - getReservedCount(book.id);
+      detailsContainer.innerHTML = `
+        <div class="book-card" style="max-width: 600px; margin:auto;">
+          <img src="${book.image}" alt="${book.title}" />
+          <h3>${book.title}</h3>
+          <p>Author: ${book.author}</p>
+          <p>Category: ${book.category}</p>
+          <p class="status ${available > 0 ? "available" : "not-available"}">${available > 0 ? "Available" : "Not Available"} (${available})</p>
+          <button type="button" id="reserveDetail" ${available > 0 ? "" : "disabled"}>Reserve Book</button>
+        </div>
+      `;
+
+      document.getElementById("reserveDetail").addEventListener("click", () => {
+        reserveBook(book.id);
+        window.location.reload();
+      });
+    }
+  </script>
+</body>
+</html>

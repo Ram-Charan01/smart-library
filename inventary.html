@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventory</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- 🔷 Navbar -->
+  <nav class="navbar">
+    <h1>📚 Smart Library (Admin)</h1>
+    <div>
+      <a href="admin.html">Home</a>
+      <a href="inventary.html">Inverntary</a>
+      <a href="requests.html">Requests</a>
+      <a href="#" id="authBtn"></a>
+    </div>
+  </nav>
+
+  <section style="padding:20px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+      <h2 style="margin:0;">📦 Inventory</h2>
+      <button id="addBookBtn" class="action-btn" type="button" style="min-width:160px;">+ Add New Book</button>
+    </div>
+    <div style="margin-top:12px;">
+      <label for="inventorySearch" style="font-weight:600; margin-right:8px;">Search:</label>
+      <input type="text" id="inventorySearch" placeholder="Search by title or author" style="padding:6px 10px; width:220px; border-radius:6px; border:1px solid #ccc;" />
+    </div>
+  </section>
+
+  <section style="padding:20px;">
+    <table class="book-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Book Title</th>
+          <th>Author</th>
+          <th>Available Stock</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody id="inventoryTable"></tbody>
+    </table>
+  </section>
+
+  <section class="edit-modal hidden modal-overlay" id="editInventorySection">
+    <div class="modal-content">
+      <h3>Edit Book</h3>
+      <form id="editInventoryForm">
+        <input type="hidden" id="editBookId" />
+        <div style="margin-bottom:8px;"><strong id="editBookInfo"></strong></div>
+        <div style="margin-bottom:8px;">
+          <label for="editBookImage">Update Image (optional): </label>
+          <input type="file" id="editBookImage" accept="image/*" />
+        </div>
+        <div style="margin-bottom:8px;">
+          <label for="editStock">Add Stock Count:</label>
+          <input type="number" id="editStock" min="0" required />
+        </div>
+        <div style="display:flex; gap:8px; justify-content:flex-end;">
+          <button class="action-btn" type="submit">Submit</button>
+          <button class="reject-btn" id="cancelEdit" type="button">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="add-modal hidden modal-overlay" id="addBookSection">
+    <div class="modal-content">
+      <h3>Add New Book</h3>
+      <form id="addBookForm">
+        <div>
+          <label for="newBookImage">Upload Image (jpg):</label>
+          <input type="file" id="newBookImage" accept="image/jpeg,image/jpg,image/png" />
+        </div>
+        <div>
+          <label for="newBookTitle">Book Title:</label>
+          <input type="text" id="newBookTitle" required />
+        </div>
+        <div>
+          <label for="newBookAuthor">Author:</label>
+          <input type="text" id="newBookAuthor" required />
+        </div>
+        <div>
+          <label for="newBookCategory">Category:</label>
+          <select id="newBookCategory" required>
+            <option value="">Select category</option>
+            <option value="CSE">CSE</option>
+            <option value="AIML">AIML</option>
+            <option value="ECE">ECE</option>
+            <option value="CIC">CIC</option>
+            <option value="OTHER">OTHER</option>
+          </select>
+        </div>
+        <div>
+          <label for="newBookStock">Stock:</label>
+          <input type="number" id="newBookStock" min="0" required />
+        </div>
+        <div style="display:flex; gap:8px; justify-content:flex-end;">
+          <button class="action-btn" type="submit">Add Book</button>
+          <button class="reject-btn" id="cancelAdd" type="button">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <script src="js/data.js"></script>
+  <script src="js/inventary.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
