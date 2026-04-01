@@ -6,6 +6,7 @@ if (localStorage.getItem("role") !== "admin") {
 // 📊 GET ELEMENTS
 const totalBooksEl = document.getElementById("totalBooks");
 const totalRequestsEl = document.getElementById("totalRequests");
+const pendingRequestsEl = document.getElementById("pendingRequests");
 const approvedRequestsEl = document.getElementById("approvedRequests");
 
 
@@ -17,6 +18,10 @@ function loadDashboard() {
 
   // 📩 Total Requests
   totalRequestsEl.textContent = reservations.length;
+
+  // ⏳ Pending Requests
+  let pendingCount = reservations.filter(r => r.status === "pending").length;
+  pendingRequestsEl.textContent = pendingCount;
 
   // ✅ Approved Requests
   let approvedCount = reservations.filter(r => r.status === "approved").length;

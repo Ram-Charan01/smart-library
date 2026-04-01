@@ -13,6 +13,26 @@ function displayRequests() {
     filtered = filtered.filter(r => String(r.userId).toLowerCase().includes(query));
   }
 
+  filtered.sort((a, b) => {
+    const priority = r => {
+      if (r.status === "pending") return 1;
+      if (r.status === "approved" && r.returnStatus !== "returned") return 2;
+      if (r.status === "approved" && r.returnStatus === "returned") return 3;
+      if (r.status === "rejected") return 4;
+      return 5;
+    };
+
+    let pa = priority(a);
+    let pb = priority(b);
+    if (pa !== pb) return pa - pb;
+
+    // Newer reservations first for same priority
+    if (a.reservedDate && b.reservedDate) {
+      return new Date(b.reservedDate) - new Date(a.reservedDate);
+    }
+    return b.id - a.id;
+  });
+
   if (filtered.length === 0) {
     table.innerHTML = "<tr><td colspan='7'>No requests found</td></tr>";
     return;
