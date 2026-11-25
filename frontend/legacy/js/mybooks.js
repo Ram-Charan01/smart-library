@@ -31,7 +31,7 @@ function displayMyBooks() {
 
     let tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${book ? book.title : "Unknown"}</td>
+      <td>${escapeBookText(book?.title || "Unknown")}</td>
       <td style="color:${statusInfo.color}; font-weight:bold;">${statusInfo.label}</td>
       <td>${r.reservedDate}</td>
       <td>${r.dueDate ? r.dueDate : "-"}</td>

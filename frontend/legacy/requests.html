@@ -3,49 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Books</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <title>Manage Requests</title>
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 
 <body>
 
   <!-- 🔷 Navbar -->
   <nav class="navbar">
-    <h1>📚 Smart Library</h1>
+    <h1>📚 Smart Library (Admin)</h1>
     <div>
-      <a href="index.html">Home</a>
-      <a href="mybooks.html">My Books</a>
+      <a href="admin.html">Home</a>
+      <a href="inventory.html">Inventory</a>
+      <a href="requests.html">Requests</a>
       <a href="#" id="authBtn"></a>
     </div>
   </nav>
 
-  <!-- 📊 Page Title -->
+  <!-- 📊 Title -->
   <section style="padding:20px;">
-    <h2>📖 My Reserved Books</h2>
+    <h2>📩 Manage Requests</h2>
+    <section class="search-section" style="margin-top:8px;">
+      <input type="text" id="requestSearch" placeholder="Search by User ID" />
+    </section>
   </section>
 
-  <!-- 📋 Table -->
+  <!-- 📋 Requests Table -->
   <section style="padding:20px;">
     <table class="book-table">
       <thead>
         <tr>
           <th>Book Name</th>
+          <th>User ID</th>
           <th>Status</th>
           <th>Reserved Date</th>
           <th>Due Date</th>
           <th>Return Status</th>
+          <th>Action</th>
         </tr>
       </thead>
-      <tbody id="myBooksTable">
-        <!-- Data comes from JS -->
+
+      <tbody id="requestsTable">
+        <!-- Filled by JS -->
       </tbody>
     </table>
   </section>
 
-  <!-- JS Files -->
+  <!-- JS -->
   <script src="js/data.js"></script>
-  <script src="js/mybooks.js"></script>
+  <script src="js/requests.js"></script>
   <script src="js/auth.js"></script>
-
 </body>
 </html>

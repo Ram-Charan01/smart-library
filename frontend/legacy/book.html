@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Book Details</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
   <nav class="navbar">
@@ -35,10 +35,10 @@
       const available = book.stock - getReservedCount(book.id);
       detailsContainer.innerHTML = `
         <div class="book-card" style="max-width: 600px; margin:auto;">
-          <img src="${book.image}" alt="${book.title}" />
-          <h3>${book.title}</h3>
-          <p>Author: ${book.author}</p>
-          <p>Category: ${book.category}</p>
+          <img src="${escapeBookText(book.image)}" alt="${escapeBookText(book.title)}" />
+          <h3>${escapeBookText(book.title)}</h3>
+          <p>Author: ${escapeBookText(book.author)}</p>
+          <p>Category: ${escapeBookText(book.category)}</p>
           <p class="status ${available > 0 ? "available" : "not-available"}">${available > 0 ? "Available" : "Not Available"} (${available})</p>
           <button type="button" id="reserveDetail" ${available > 0 ? "" : "disabled"}>Reserve Book</button>
         </div>

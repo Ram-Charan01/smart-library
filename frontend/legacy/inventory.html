@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Inventory</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
   <!-- 🔷 Navbar -->
@@ -70,12 +70,22 @@
       <h3>Add New Book</h3>
       <form id="addBookForm">
         <div>
-          <label for="newBookImage">Upload Image (jpg):</label>
-          <input type="file" id="newBookImage" accept="image/jpeg,image/jpg,image/png" />
+          <label for="bookLookup">Search Open Library by title</label>
+          <div class="book-lookup-controls">
+            <input type="search" id="bookLookup" placeholder="Enter at least 3 characters" aria-describedby="bookLookupStatus" />
+            <button class="action-btn" type="button" id="searchBookBtn">Search</button>
+          </div>
+          <small id="bookLookupStatus" role="status"></small>
         </div>
         <div>
-          <label for="newBookTitle">Book Title:</label>
-          <input type="text" id="newBookTitle" required />
+          <label for="bookResults">Book title</label>
+          <select id="bookResults" required>
+            <option value="">Search to find a book</option>
+          </select>
+        </div>
+        <div id="manualTitleField" hidden>
+          <label for="newBookTitle">Manual book title</label>
+          <input type="text" id="newBookTitle" disabled />
         </div>
         <div>
           <label for="newBookAuthor">Author:</label>
@@ -85,12 +95,24 @@
           <label for="newBookCategory">Category:</label>
           <select id="newBookCategory" required>
             <option value="">Select category</option>
+            <option value="CE">CE</option>
             <option value="CSE">CSE</option>
-            <option value="AIML">AIML</option>
             <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="ME">ME</option>
+            <option value="IT">IT</option>
+            <option value="CSIT">CSIT</option>
+            <option value="AIML">AIML</option>
+            <option value="AIDS">AIDS</option>
+            <option value="CSBS">CSBS</option>
             <option value="CIC">CIC</option>
-            <option value="OTHER">OTHER</option>
+            <option value="CSD">CSD</option>
           </select>
+        </div>
+        <div>
+          <img id="bookCoverPreview" alt="Selected book cover" width="64" hidden />
+          <label for="newBookImage">Upload a different cover (optional)</label>
+          <input type="file" id="newBookImage" accept="image/jpeg,image/jpg,image/png" />
         </div>
         <div>
           <label for="newBookStock">Stock:</label>

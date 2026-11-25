@@ -73,6 +73,11 @@ function saveReservations() {
 }
 
 // 🔍 GET BOOK BY ID
+function escapeBookText(value) {
+  const entities = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+  return String(value).replace(/[&<>"']/g, character => entities[character]);
+}
+
 function getBookById(id) {
   return books.find(book => book.id === id);
 }

@@ -1,0 +1,52 @@
+.page-heading, .notice, .single-book {
+  width: min(1000px, 92vw);
+  margin: 18px auto;
+}
+
+.heading-actions, .row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.row-actions { justify-content: center; }
+.heading-actions h2 { margin: 0; }
+.single-book { max-width: 550px; }
+.book-detail-link { display: block; text-align: center; padding-top: 10px; }
+.cover-placeholder {
+  display: grid;
+  place-items: center;
+  height: 160px;
+  background: var(--surface-strong);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--muted);
+}
+
+.nav-logout {
+  font: inherit;
+  font-weight: 600;
+  color: inherit;
+  background: none;
+  border: 0;
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.notice { padding: 10px 12px; background: var(--surface); border-radius: 8px; }
+.notice-error, .due-label { color: var(--danger); }
+.due-label { display: block; }
+.notice-error { border: 1px solid currentColor; }
+.book-dialog { max-height: 90vh; overflow: auto; margin: auto; }
+.book-dialog::backdrop { background: rgba(0, 0, 0, 0.38); }
+.book-dialog .notice, .login-box .notice { width: 100%; margin: 0; }
+.request-status { text-transform: capitalize; }
+.user-id { overflow-wrap: anywhere; }
+.login-box label { display: grid; gap: 6px; text-align: left; }
+
+@media (max-width: 560px) {
+  .navbar { flex-wrap: wrap; gap: 10px; padding-inline: 12px; }
+  .navbar a:first-child { margin-left: 0; }
+}

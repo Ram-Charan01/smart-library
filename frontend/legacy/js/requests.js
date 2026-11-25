@@ -70,7 +70,7 @@ function displayRequests() {
     }
 
     tr.innerHTML = `
-      <td>${book ? book.title : "Unknown"}</td>
+      <td>${escapeBookText(book?.title || "Unknown")}</td>
       <td>${r.userId}</td>
       <td style="color:${statusInfo.color}; font-weight:bold;">${statusInfo.label}</td>
       <td>${r.reservedDate}</td>

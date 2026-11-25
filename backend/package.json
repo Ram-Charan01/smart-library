@@ -1,0 +1,14 @@
+{
+  "name": "smart-library-backend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env index.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongodb": "^6.17.0",
+    "mongodb-memory-server-core": "^10.2.0"
+  }
+}

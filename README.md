@@ -1,72 +1,38 @@
-# Smart Library Management (FSD Lab Project)
+# Smart Library MERN prototype
 
-## Overview
-A lightweight client-side library management system built with HTML/CSS/JavaScript and `localStorage` persistence. Supports:
-- Admin dashboard with inventory and request tracking
-- User homepage with book catalog and search
-- Login/auth toggling (admin vs user)
-- Book CRUD (add/edit/delete) from inventory page
-- Request/reservation workflow (pending/approved/rejected/returned)
+Smart Library uses React for the browser UI, Express and Node.js for the API, and MongoDB for users, sessions, inventory, and borrowing history.
 
-## File Structure
-- `index.html` – user home page (catalog, search, request library books)
-- `admin.html` – admin dashboard (stats cards, quick operation links)
-- `inventory.html` – inventory management (list, add/search/edit/delete books)
-- `requests.html` – request management (pending/resolved requests, approval/return handling)
-- `login.html` – authentication form with roles
-- `book.html`, `mybooks.html` – secondary views
-- `css/style.css` – app styles
-- `js/data.js` – shared data model (`books`, `reservations`, persistence helpers)
-- `js/auth.js` – login/logout and role gating
-- `js/app.js` – user home initialization
-- `js/admin.js` – admin dashboard counters
-- `js/inventory.js` – inventory page logic
-- `js/requests.js` – request page logic
-- `assets/images` – placeholder images
+## Run from the VS Code terminal
 
-## New Features Implemented
-1. Inventory dashboard now has a board button: **Add New Book**
-2. Add book modal:
-   - Upload cover image (`jpg/jpeg/png`)
-   - Title, author, category, stock
-   - Adds a book to inventory table and `localStorage`
-3. Search bar styling harmonized across:
-   - `index.html`, `inventory.html`, `requests.html`
-4. Request sorting in `requests.html`:
-   - Pending requests first
-   - Approved-but-not-returned next
-   - Returned or rejected last
-5. Admin dashboard panel now includes **Pending Requests** count.
-6. Renamed `inventary` to `inventory` in files and references.
+Use Node.js 22.13 or newer. Open a fresh terminal after installing Node.js so the terminal picks up the updated PATH. In PowerShell, run the following from the project folder.
 
-## Usage
-1. Open `login.html` in browser.
-2. Login as admin (use hardcoded admin credentials in `js/auth.js` if present) or as user.
-3. Admin flows:
-   - Go to `Inventory` to add/edit/delete books.
-   - Go to `Requests` to approve/reject return flows.
-   - Dashboard displays counts and status.
-4. User flows:
-   - Browse books on `index.html`, search and request reservation.
-   - View own reservations in `mybooks.html`.
+```powershell
+npm.cmd ci
+npm.cmd start
+```
 
-## Important Notes
-- Data is stored in browser `localStorage`; clearing storage resets app state.
-- File uploads are handled with `URL.createObjectURL()` only for the session and not persisted as physical files.
+Open [the login page](http://127.0.0.1:3000/login.html). Express serves the React build and API on the same port. Leave the terminal running while using the app. Press Ctrl+C to stop it.
 
-## Developer
-- Author: FSD Lab Student
-- Date: 2026-03-31
+The first start downloads a MongoDB server binary and starts a local database. Data lives in `backend/.library-data` and persists across restarts. If you already have MongoDB or use Atlas, copy `backend/.env.example` to `backend/.env` and set `MONGODB_URI`. Open Library lookup also requires internet access. Use manual entry for offline catalog additions.
 
-## Test Checklist
-- [x] Login role checks work (admin/regular user)
-- [x] Inventory add modal shows in center and adds a row
-- [x] Search bars share consistent styling
-- [x] Requests page prioritizes pending and return-needed
-- [x] Admin dashboard counts (`total`, `pending`, `approved`) update
+| Role | Username | Demo password |
+| --- | --- | --- |
+| Admin | `admin` | `admin123` |
+| Student | `user` | `user123` |
 
-## Next Improvements
-- Add server-side API + database for persistence
-- File upload as real stored image URLs
-- History logging for admin actions
-- UI polish with responsive layout and animations
+These credentials are for local demos. Set `ADMIN_PASSWORD` and `STUDENT_PASSWORD` before starting with a fresh database to choose different passwords. The app seeds four sample titles. Existing browser storage from the earlier prototype is separate from the MongoDB data.
+
+## Workflows
+
+- Students search the catalog by title, author, or branch, open book details, request available copies, and track their requests in **My Books**.
+- Admins add a title by searching Open Library or entering it manually, select one of the 12 branches, and set initial stock. They can increase stock and replace covers. Uploaded JPEG or PNG covers up to 1 MB are stored with the book in MongoDB.
+- Admins see pending requests first, can approve or reject them, and mark approved loans as returned. Approval assigns a due date seven days later. A return frees the copy and preserves the history. The dashboard shows title, request, pending, and approval totals.
+- Request operations update the book and its loan history atomically, so approving the last copy or repeating the same return cannot produce extra inventory.
+
+## Project layout
+
+- `frontend/` contains React, styles, images, and the frontend build. The React entry point is `frontend/src/main.jsx`. The original browser-only prototype is kept in `frontend/legacy/`.
+- `backend/` contains the Express API, MongoDB configuration and data, shared branch validation, and integration tests. The server entry point is `backend/index.js`.
+- The root npm workspace installs dependencies and runs both parts. Use the Express URL for the MERN app.
+
+Run `npm.cmd test` to verify the API against an isolated local MongoDB database.

@@ -9,10 +9,10 @@ function createBookCard(book) {
   let card = document.createElement("div");
   card.className = "book-card";
   card.innerHTML = `
-    <img src="${book.image}" alt="${book.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=No+Image';" />
-    <h3>${book.title}</h3>
-    <p>Author: ${book.author}</p>
-    <p>Category: ${book.category}</p>
+    <img src="${escapeBookText(book.image)}" alt="${escapeBookText(book.title)}" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=No+Image';" />
+    <h3>${escapeBookText(book.title)}</h3>
+    <p>Author: ${escapeBookText(book.author)}</p>
+    <p>Category: ${escapeBookText(book.category)}</p>
     <p class="status ${availableClass}">${availableText} (Stock: ${book.stock - getReservedCount(book.id)})</p>
     <button type="button" data-id="${book.id}" ${!isAvailable ? "disabled" : ""}>Reserve Book</button>
     <button type="button" class="detail-btn" data-id="${book.id}">View Details</button>
